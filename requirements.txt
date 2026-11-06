@@ -1,0 +1,4 @@
+# Install a CUDA-enabled PyTorch build suitable for your CARC GPU first.
+torch>=2.6
+transformers>=4.45,<5
+safetensors>=0.4
