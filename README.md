@@ -2,6 +2,12 @@
 
 EE 451: compare custom CUDA full bitonic sort and hierarchical Top-k, feeding a common CUDA token sampler. Compare correctness with an explicitly tie-broken reference and performance with PyTorch Top-k. Model inference is input preparation, never part of kernel timing.
 
+## Dataset instructions
+
+**The real-model dataset is already collected and shared through GitHub. Teammates should clone/pull and load the saved tensors; no model download or regeneration is needed.** Start with [the CARC teammate quickstart](data/README.md#teammates-start-here-on-carc). Collection commands below are for optional regeneration.
+
+See [data/README.md](data/README.md) for dataset contents, CARC environment setup, loading examples, regeneration, and GitHub sharing instructions.
+
 ## First dataset: ten groups of real DistilGPT2 logits
 
 `data/prompts/groups.json` contains 10 categories with 32 unique prompts each (320 total): everyday, science, math, code, history, story, dialogue, facts, procedures, and engineering. These are controlled starter prompts, not a representative language benchmark or guaranteed probability distributions. Category labels describe prompt subjects; they do not guarantee peaked/uniform outputs.
@@ -42,7 +48,7 @@ Record the installed environment too:
 python -m pip freeze > data/logits/distilgpt2/environment.txt
 ```
 
-One teammate should collect and share the resulting directory through shared CARC storage. Everyone benchmarks the same saved tensors. Logit files are ignored by Git; commit the prompt definitions and collector.
+Everyone benchmarks the same saved tensors. The team shares the fixed dataset through GitHub; generated outputs are ignored by default, so adding the dataset requires explicitly forcing the ten files and manifest into Git. See [dataset sharing instructions](data/README.md#share-through-github). Do not commit model downloads or smoke-test outputs.
 
 ## Load inputs
 
