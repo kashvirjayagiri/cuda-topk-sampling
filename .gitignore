@@ -1,6 +1,21 @@
+# Build artifacts
+build/
+*.o
+*.so
+
+# Python
 __pycache__/
-*.py[cod]
+.pytest_cache/
 .venv/
-.env
-data/logits/
-.cache/
+*.pyc
+
+# Generated logits (potentially large)
+data/logits/*
+!data/logits/.gitkeep
+
+# Local benchmark outputs
+results/*
+!results/.gitkeep
+
+# macOS
+.DS_Store
