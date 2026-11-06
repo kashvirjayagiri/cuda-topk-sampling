@@ -1,0 +1,107 @@
+{
+  "model": "distilbert/distilgpt2",
+  "requested_revision": "main",
+  "resolved_revision": "2290a62682d06624634c1f46a6ad5be0f47f38aa",
+  "vocab_size": 50257,
+  "dtype": "float32",
+  "device": "cuda",
+  "gpu": "Tesla P100-PCIE-16GB",
+  "python": "3.11.9",
+  "torch": "2.6.0+cu126",
+  "transformers": "4.57.6",
+  "cuda": "12.6",
+  "prompt_file_sha256": "9117c011ce40cec1f9e1a195d7cee22262e0ea69d8c26bc81ab1f3c697f743fd",
+  "collection": "One raw next-token vector per prompt; no temperature, softmax, or filtering.",
+  "groups": [
+    {
+      "id": "01_everyday",
+      "file": "01_everyday.pt",
+      "shape": [
+        32,
+        50257
+      ],
+      "sha256": "8a7c04e29ceba6f0ef0fff8f6f2b156984e134174275ad4cdb08986ff63cd458"
+    },
+    {
+      "id": "02_science",
+      "file": "02_science.pt",
+      "shape": [
+        32,
+        50257
+      ],
+      "sha256": "dfa3b39fdf573993e0a08f1302c399b0beac25b66c367cca83e13d939c42ae8b"
+    },
+    {
+      "id": "03_math",
+      "file": "03_math.pt",
+      "shape": [
+        32,
+        50257
+      ],
+      "sha256": "5ea3c1a40fb57ed751697ac584c23b7e401fd50eb31677f37e5305b78dbdabe7"
+    },
+    {
+      "id": "04_code",
+      "file": "04_code.pt",
+      "shape": [
+        32,
+        50257
+      ],
+      "sha256": "411fe5c1278ceaff4d474224b0df562eb0075362df571f6591d3daad8e74c146"
+    },
+    {
+      "id": "05_history",
+      "file": "05_history.pt",
+      "shape": [
+        32,
+        50257
+      ],
+      "sha256": "d6830349539c607ceeaff575d84cba522401a0c89c2bb333dc7c09e0ad06429a"
+    },
+    {
+      "id": "06_story",
+      "file": "06_story.pt",
+      "shape": [
+        32,
+        50257
+      ],
+      "sha256": "7fa80e5388778a3fea6171c89d5b72d75925e3bf1dcce6df77fca163b2626d05"
+    },
+    {
+      "id": "07_dialogue",
+      "file": "07_dialogue.pt",
+      "shape": [
+        32,
+        50257
+      ],
+      "sha256": "2a0ceec53ddc448166e47c1037dadc62320b837fe74e6a4677a5a921a0e5f9bc"
+    },
+    {
+      "id": "08_facts",
+      "file": "08_facts.pt",
+      "shape": [
+        32,
+        50257
+      ],
+      "sha256": "150795bf125921a93ae768071eec67477809d30e02136301b9c4228f74a259b4"
+    },
+    {
+      "id": "09_procedures",
+      "file": "09_procedures.pt",
+      "shape": [
+        32,
+        50257
+      ],
+      "sha256": "5f867f21d4acff3523b2db377eb0afdb03449924d5c38a0680ec86b3e2081ce2"
+    },
+    {
+      "id": "10_engineering",
+      "file": "10_engineering.pt",
+      "shape": [
+        32,
+        50257
+      ],
+      "sha256": "dcb670669f10957c9ff6061bbfc20c64ee17b26247949b594d6c61b171087e5d"
+    }
+  ]
+}
