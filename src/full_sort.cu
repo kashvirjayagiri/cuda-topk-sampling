@@ -1,5 +1,6 @@
 #include <climits>
 #include <limits>
+#include <math_constants.h>
 
 #include "topk.cuh"
 
