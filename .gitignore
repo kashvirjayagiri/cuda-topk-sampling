@@ -19,3 +19,8 @@ results/*
 
 # macOS
 .DS_Store
+# Personal learning aid (not part of the project)
+/scripts/walkthrough_full_sort.py
+
+# Local formatting configuration
+/.clang-format

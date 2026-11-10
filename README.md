@@ -93,3 +93,7 @@ November 6: tiny working components and agreed interfaces. November 9: independe
 ## Remaining work
 
 CUDA selectors, CUDA sampler, reference tests, benchmark runner, and synthetic workload generator are not implemented yet. This initial commit prepares reproducible real-model inputs. Keep the proposal's synthetic grid (V = 8192, 32768, 50000, 131072; four distributions) as separate required experiments; the real-model dataset supplements it and does not cover those vocabulary sizes.
+
+## Full-sort CUDA baseline (Kashvi)
+
+The first implementation and CPU-reference GPU correctness test are in `src/full_sort.cu` and `tests/test_full_sort.cu`. See [build, test, and interface instructions](docs/full-sort.md). CUDA compilation and execution must be verified on CARC; this implementation has not yet been benchmarked.
