@@ -113,6 +113,31 @@ For ten 32-row groups, the full matrix checks **1,480 GPU calls**: `(32 + 4 + 1)
 
 ## Verification status and next steps
 
-The core C++ sorter compiled and passed the 52-case GPU test suite on the team's CARC P100. The new Python bridge and saved-data validator have passed local Python syntax/help checks, but CUDA compilation and real-data execution of this new bridge are pending a CARC run. No performance claims are established yet.
+The core C++ sorter compiled and passed the 52-case GPU test suite on the team's CARC P100. The Python bridge compiled on CARC and the saved-data validator passed all 1,480 calls across ten groups, B=1/8/32, and k=1/10/50/100, as reported by Kashvi. No performance claims are established yet.
 
 Next: run saved-data validation, then measure selection latency with CUDA events after warm-up and report workspace usage. This change does not implement John's hierarchical selector, Joel's sampler, or end-to-end benchmarks.
+
+
+## Selection-only benchmark
+
+The native timing API still needs verification on CARC. Rebuild the shared library after pulling these changes.
+
+```bash
+python scripts/benchmark_full_sort.py --groups 01_everyday --batch-sizes 32 --k 10
+```
+
+After checking this first configuration, run all groups and configurations:
+
+```bash
+python scripts/benchmark_full_sort.py
+```
+
+Default: 10 warm-up calls and 50 timed repetitions per window, covering all rows. Optional flags: `--warmup`, `--repetitions`, `--data`, `--groups`, `--batch-sizes`, `--k`, `--library`, `--output` (must be a new directory).
+
+Results are saved under a fresh `results/full-sort-.../` directory:
+
+- `summary.csv`: per-window median/min/max milliseconds, rows per second, explicit input/output/workspace bytes.
+- `samples.csv`: every individual CUDA-event duration.
+- `metadata.json`: hardware/software, code/data hashes, settings, and completion status.
+
+Timings are native CUDA-event intervals around the entire multi-launch selection call. Python call overhead is outside the interval; native launch-submission gaps can still contribute. These are selection-operation latency measurements, not profiler sums of individual kernel durations. Sampling, disk reads, transfers, allocation, and correctness checks are excluded. Console summaries are medians of window medians, while CSV retains the individual windows for analysis. Memory values count explicit tensors, not allocator reservation or process peak. Do not report these as end-to-end sampling results or speedups without the corresponding comparisons.

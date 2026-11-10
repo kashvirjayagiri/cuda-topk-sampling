@@ -63,3 +63,33 @@ class FullSort:
             message = self.library.full_sort_error_string(error).decode()
             raise RuntimeError(f'Full-sort CUDA launch failed: {message}')
         return self.scores, self.ids
+
+    def benchmark(self, logits, warmup=10, repetitions=50):
+        """Return native CUDA-event milliseconds; no allocation in timed regions.
+
+        Event intervals include the entire multi-launch selector, including GPU
+        idle gaps if the host cannot issue kernels fast enough. This is not a
+        sum of individual kernel durations and does not include sampling.
+        """
+        if warmup < 0 or repetitions <= 0:
+            raise ValueError('Require warmup >= 0 and repetitions > 0')
+        # Check input and run once before timing; also initialize CUDA kernels.
+        self(logits)
+        function = self.library.full_sort_benchmark
+        function.argtypes = self.library.full_sort_run.argtypes + [
+            ctypes.c_int, ctypes.c_int, ctypes.POINTER(ctypes.c_float),
+        ]
+        function.restype = ctypes.c_int
+        samples = (ctypes.c_float * repetitions)()
+        with torch.cuda.device(self.device):
+            stream = torch.cuda.current_stream(self.device)
+            error = function(
+                logits.data_ptr(), *self.shape, self.k,
+                self.scores.data_ptr(), self.ids.data_ptr(),
+                self.work_scores.data_ptr(), self.work_ids.data_ptr(), self.capacity,
+                stream.cuda_stream, warmup, repetitions, samples,
+            )
+        if error:
+            message = self.library.full_sort_error_string(error).decode()
+            raise RuntimeError(f'Full-sort timing failed: {message}')
+        return list(samples)

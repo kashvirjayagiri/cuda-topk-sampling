@@ -24,3 +24,6 @@ results/*
 
 # Local formatting configuration
 /.clang-format
+
+# Private project catch-up notes
+/docs/CATCH_UP.md
