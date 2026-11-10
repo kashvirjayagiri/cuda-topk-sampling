@@ -81,8 +81,38 @@ cudaError_t status = topk::full_sort(
 
 All arrays must be contiguous, have sufficient capacity, and not overlap input, outputs, or workspace. Keep buffers alive until stream completion. Outputs are descending FP32 values and int32 original token IDs. The function performs no allocations, copies to CPU, or explicit device synchronization. Input sizes and k must be positive, k <= V, and V <= 2^30; practical GPU memory limits are much smaller.
 
+## Validate the saved DistilGPT2 inputs
+
+The Python bridge calls the same C++ sorter through a small shared library; it does not reimplement sorting or require PyTorch C++ headers. The `FullSort` object allocates reusable outputs and workspace once, uses PyTorch's current CUDA stream, and checks dimensions/device/dtype. Keep the input and sorter alive until GPU work finishes. Use a separate sorter per concurrent stream. Outputs are overwritten on the next call.
+
+After pulling these changes on CARC, reconfigure so CMake discovers the new shared-library target:
+
+```bash
+module load cuda/12.6.3
+source ~/ee451-env/bin/activate
+cmake -S . -B build -DCMAKE_CUDA_ARCHITECTURES=60 -DCMAKE_BUILD_TYPE=Release
+cmake --build build -j 4
+ctest --test-dir build --output-on-failure
+```
+
+Start with one batch size and one k:
+
+```bash
+python scripts/validate_full_sort.py --batch-sizes 32 --k 10
+```
+
+This checks all available groups once per file. To limit it to the existing smoke-test group, add `--data data/logits/smoke` if that folder exists. To run the full matrix:
+
+```bash
+python scripts/validate_full_sort.py
+```
+
+For ten 32-row groups, the full matrix checks **1,480 GPU calls**: `(32 + 4 + 1) batches * 4 k values * 10 groups`. Each call checks exact token IDs against a stable CPU sort, score agreement within 1e-5 absolute/relative tolerance, and input preservation. The stable CPU ordering explicitly handles ties. Nonfinite inputs are rejected before testing.
+
+`--library PATH` can point to a shared library in another build directory. Running `--help` needs only Python; actual validation needs CUDA-enabled PyTorch, saved inputs, and the compiled library.
+
 ## Verification status and next steps
 
-The source and tests were prepared on a Mac without nvcc or an NVIDIA GPU. CUDA compilation and GPU correctness are pending a CARC run. No performance claims are established yet.
+The core C++ sorter compiled and passed the 52-case GPU test suite on the team's CARC P100. The new Python bridge and saved-data validator have passed local Python syntax/help checks, but CUDA compilation and real-data execution of this new bridge are pending a CARC run. No performance claims are established yet.
 
-Next: run the commands above; address any compiler/test failures; add the team's Python/C++ bridge for the saved `.pt` tensors; then benchmark with CUDA events after warm-up, excluding allocations and transfers. The dataset loader, PyTorch bridge, sampler, and benchmark runner are not part of this baseline implementation.
+Next: run saved-data validation, then measure selection latency with CUDA events after warm-up and report workspace usage. This change does not implement John's hierarchical selector, Joel's sampler, or end-to-end benchmarks.

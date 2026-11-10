@@ -10,3 +10,8 @@ add_executable(test_full_sort tests/test_full_sort.cu)
 target_link_libraries(test_full_sort PRIVATE full_sort)
 enable_testing()
 add_test(NAME full_sort_correctness COMMAND test_full_sort)
+
+# A small shared-library bridge for loading saved PyTorch tensors from Python.
+set_target_properties(full_sort PROPERTIES POSITION_INDEPENDENT_CODE ON)
+add_library(full_sort_python SHARED src/full_sort_api.cu)
+target_link_libraries(full_sort_python PRIVATE full_sort)
