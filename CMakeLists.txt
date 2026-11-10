@@ -15,3 +15,15 @@ add_test(NAME full_sort_correctness COMMAND test_full_sort)
 set_target_properties(full_sort PROPERTIES POSITION_INDEPENDENT_CODE ON)
 add_library(full_sort_python SHARED src/full_sort_api.cu)
 target_link_libraries(full_sort_python PRIVATE full_sort)
+
+add_library(hierarchical_topk STATIC src/hierarchical_topk.cu)
+target_include_directories(hierarchical_topk PUBLIC include)
+target_link_libraries(hierarchical_topk PUBLIC CUDA::cudart)
+set_target_properties(hierarchical_topk PROPERTIES POSITION_INDEPENDENT_CODE ON)
+
+add_executable(test_local_tile_topk tests/test_local_tile_topk.cu)
+target_link_libraries(test_local_tile_topk PRIVATE hierarchical_topk)
+add_test(NAME local_tile_topk_correctness COMMAND test_local_tile_topk)
+
+add_library(local_tile_topk_python SHARED src/local_tile_topk_api.cu)
+target_link_libraries(local_tile_topk_python PRIVATE hierarchical_topk)
