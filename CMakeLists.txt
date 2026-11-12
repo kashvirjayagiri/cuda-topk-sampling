@@ -34,3 +34,15 @@ add_test(NAME hierarchical_topk_correctness COMMAND test_hierarchical_topk)
 
 add_library(hierarchical_topk_python SHARED src/hierarchical_topk_api.cu)
 target_link_libraries(hierarchical_topk_python PRIVATE hierarchical_topk)
+
+add_library(radix_topk STATIC src/radix_topk.cu)
+target_include_directories(radix_topk PUBLIC include)
+target_link_libraries(radix_topk PUBLIC CUDA::cudart)
+set_target_properties(radix_topk PROPERTIES POSITION_INDEPENDENT_CODE ON)
+
+add_executable(test_radix_topk tests/test_radix_topk.cu)
+target_link_libraries(test_radix_topk PRIVATE radix_topk)
+add_test(NAME radix_topk_correctness COMMAND test_radix_topk)
+
+add_library(radix_topk_python SHARED src/radix_topk_api.cu)
+target_link_libraries(radix_topk_python PRIVATE radix_topk)

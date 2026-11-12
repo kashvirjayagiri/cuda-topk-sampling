@@ -58,4 +58,23 @@ cudaError_t hierarchical_topk(const float* input, int batch, int vocab, int k,
                               float* output_values, int* output_ids,
                               HierarchicalWorkspace workspace,
                               cudaStream_t stream = nullptr);
+
+struct RadixWorkspace {
+    void* data;
+    std::size_t bytes;
+};
+
+// Queries all caller-owned storage, including CUB scan and segmented-sort
+// scratch. Requires 1 <= k <= vocab and batch*vocab <= INT_MAX. Query once
+// before allocating the workspace and before timed calls.
+cudaError_t radix_topk_workspace_bytes(int batch, int vocab, int k,
+                                      std::size_t* bytes, cudaStream_t stream = nullptr);
+
+// Exact global Top-k into contiguous [batch,k] FP32 scores and int32 original
+// IDs. Input is contiguous finite FP32 [batch,vocab]. All buffers are distinct
+// and device-resident. Enqueues on stream without allocation, host transfer,
+// or synchronization; caller retains buffers until stream completion.
+cudaError_t radix_topk(const float* input, int batch, int vocab, int k,
+                       float* output_values, int* output_ids,
+                       RadixWorkspace workspace, cudaStream_t stream = nullptr);
 }  // namespace topk
