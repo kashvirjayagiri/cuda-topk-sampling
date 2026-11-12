@@ -1,0 +1,86 @@
+{
+  "started_utc": "20261112T223025732927Z",
+  "status": "complete",
+  "method": "full_sort",
+  "timing": "native CUDA events around one full selection call",
+  "sampling_included": false,
+  "dtype": "float32",
+  "gpu": "Tesla P100-PCIE-16GB",
+  "compute_capability": [
+    6,
+    0
+  ],
+  "torch": "2.6.0+cu126",
+  "cuda_runtime": "12.6",
+  "git_commit": "ca7308cde7b419b7079e8de7a7f2bec39ee0d29f",
+  "git_worktree_status": "",
+  "nvcc_version": null,
+  "driver_versions": "580.159.04",
+  "warmup": 10,
+  "repetitions": 50,
+  "batch_sizes": [
+    1,
+    8,
+    32
+  ],
+  "k": [
+    1,
+    10,
+    50,
+    100
+  ],
+  "library": "/home1/jayagiri/cuda-topk-sampling/build/libfull_sort_python.so",
+  "library_sha256": "23196f52d72818490002028d7096b91bd83b2bc083d099a335c6138945ae12bc",
+  "source_sha256": {
+    "src/full_sort.cu": "e8cdd48949746a151c86b43f3610889d2d4fbb80527981cb963493c025f85032",
+    "src/full_sort_api.cu": "fcc472bab9ebc8d5db5d65f4d5ead7f511e1b27e4f5a9d11466102c7c05542e0",
+    "include/topk.cuh": "c59cd079eaad0954d4a66d03ed65ec7eb862ec4b67436b94e5c845f91dd46301",
+    "scripts/full_sort.py": "c093570ef7f3a6bed7f6e89374dbf9b47a496a7a305241b3c98863e516f0aa76",
+    "scripts/benchmark_full_sort.py": "4d075a20c9fe26037c3d5f9aabda96c4721a9ade0de62bfd62e5a4a56c797490"
+  },
+  "inputs_sha256": {
+    "v131072_near_uniform.pt": "af62ed5ef98b4adb191ceec1246096c0b6ab9fadca1b478c5b15ecafcb31e59c",
+    "v131072_normal.pt": "a771d8200002eb08b5d3f97465897083fc74ee2c3a275b481625cf93d94d392a",
+    "v131072_peaked.pt": "13f28ccef7e941a99ec5ace318c376124a35406422488562b7d50a29cb548b2a",
+    "v131072_tie_heavy.pt": "8ebc6422b20ae94965288d4f3a77beb9c454f6d29a989f6027687d16e81f1a99",
+    "v32768_near_uniform.pt": "552c3d23a9647fd08162c17629c0c5527c5f6d9f459af06b3d92eca2c13e9639",
+    "v32768_normal.pt": "1898685af14dcb350da63b3c64c4363a8ba3b831bb6e1549b81485f8a5e0f4a5",
+    "v32768_peaked.pt": "c303a5fe6534948490c6a43a7f1fbde1d6d01963416c26df2d564024645b971a",
+    "v32768_tie_heavy.pt": "ddd7cf8830449b5410ff04aeb99dda5489a96c93389ff8e3cb7ed59810ea5a73",
+    "v50000_near_uniform.pt": "104234e76d8803971985495ae699fab8911a8aeef9f094f83fe79ad3d8ff5456",
+    "v50000_normal.pt": "74cf6747ed99524e5953e4feba1b91e970364be03439c593dbfdf606ebeac6b0",
+    "v50000_peaked.pt": "3e87b5e0252baf6ebf75bc32c689b5188d2017aa4f7be532e5a94eab3ee7cddf",
+    "v50000_tie_heavy.pt": "3b41e84d11e23bb71f24a4925fbde59e8789b643931f3fd5dcf425467b426fe5",
+    "v8192_near_uniform.pt": "543dc0249ad28838462c58adfc44ef28335e3d275e5c0f783c0870e1d6187dca",
+    "v8192_normal.pt": "f67287da267e7ed8f68f6474a97a8b22f666d18b0845152ba1949de2548e52ef",
+    "v8192_peaked.pt": "75b5707c5a7b6ecd3f20a82c102f61b73390ec30ab513d43b26adda3d0bfd948",
+    "v8192_tie_heavy.pt": "575a9ba77b2955f0a113f482ac339dc86ef5660b392fdc534e85b9ff74c92fcf"
+  },
+  "memory_scope": "Explicit tensor bytes, not allocator reservation or process peak",
+  "excluded": [
+    "disk reads",
+    "host/device copies",
+    "allocation",
+    "validation",
+    "model inference"
+  ],
+  "dataset_manifest": {
+    "kind": "synthetic",
+    "seed": 451,
+    "torch_version": "2.6.0+cu126",
+    "rows_per_file": 32,
+    "dtype": "float32",
+    "vocab_sizes": [
+      8192,
+      32768,
+      50000,
+      131072
+    ],
+    "distributions": {
+      "normal": "Standard normal logits",
+      "near_uniform": "Normal logits scaled by 0.01 for nearly uniform softmax",
+      "peaked": "Standard normal logits with one randomly chosen token boosted by 15 per row",
+      "tie_heavy": "Uniform integer scores from -4 through 4, converted to FP32"
+    }
+  }
+}
