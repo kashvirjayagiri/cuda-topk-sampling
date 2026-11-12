@@ -27,3 +27,10 @@ add_test(NAME local_tile_topk_correctness COMMAND test_local_tile_topk)
 
 add_library(local_tile_topk_python SHARED src/local_tile_topk_api.cu)
 target_link_libraries(local_tile_topk_python PRIVATE hierarchical_topk)
+
+add_executable(test_hierarchical_topk tests/test_hierarchical_topk.cu)
+target_link_libraries(test_hierarchical_topk PRIVATE hierarchical_topk)
+add_test(NAME hierarchical_topk_correctness COMMAND test_hierarchical_topk)
+
+add_library(hierarchical_topk_python SHARED src/hierarchical_topk_api.cu)
+target_link_libraries(hierarchical_topk_python PRIVATE hierarchical_topk)

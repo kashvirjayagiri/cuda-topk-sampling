@@ -36,4 +36,26 @@ int local_tile_count(int vocab);
 cudaError_t local_tile_topk(const float* input, int batch, int vocab, int k,
                             float* output_values, int* output_ids,
                             cudaStream_t stream = nullptr);
+
+struct HierarchicalWorkspace {
+    float* values_a;
+    int* ids_a;
+    float* values_b;
+    int* ids_b;
+    std::size_t capacity;  // Elements in EACH of the four buffers.
+};
+
+// Elements per workspace buffer: batch * ceil(vocab/256) * k.
+// Returns zero for invalid dimensions or when a single tile needs no workspace.
+std::size_t hierarchical_workspace_elements(int batch, int vocab, int k);
+
+// Selects global Top-k into contiguous [batch,k] outputs. Requires finite FP32
+// input, 1 <= k <= min(vocab,256), and four distinct workspace buffers when
+// tile_count > 1. Input, workspace, and outputs must not overlap. Enqueues on
+// stream without allocation, transfer, or synchronization. Caller owns all
+// buffers until stream completion; execution errors surface at synchronization.
+cudaError_t hierarchical_topk(const float* input, int batch, int vocab, int k,
+                              float* output_values, int* output_ids,
+                              HierarchicalWorkspace workspace,
+                              cudaStream_t stream = nullptr);
 }  // namespace topk
