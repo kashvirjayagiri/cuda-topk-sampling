@@ -46,3 +46,15 @@ add_test(NAME radix_topk_correctness COMMAND test_radix_topk)
 
 add_library(radix_topk_python SHARED src/radix_topk_api.cu)
 target_link_libraries(radix_topk_python PRIVATE radix_topk)
+
+add_library(rejection_sampler STATIC src/rejection_sampler.cu)
+target_include_directories(rejection_sampler PUBLIC include)
+target_link_libraries(rejection_sampler PUBLIC CUDA::cudart)
+set_target_properties(rejection_sampler PROPERTIES POSITION_INDEPENDENT_CODE ON)
+
+add_executable(test_rejection_sampler tests/test_rejection_sampler.cu)
+target_link_libraries(test_rejection_sampler PRIVATE rejection_sampler)
+add_test(NAME rejection_sampler_correctness COMMAND test_rejection_sampler)
+
+add_library(rejection_sampler_python SHARED src/rejection_sampler_api.cu)
+target_link_libraries(rejection_sampler_python PRIVATE rejection_sampler)
