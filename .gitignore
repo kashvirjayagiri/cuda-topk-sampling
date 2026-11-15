@@ -27,3 +27,8 @@ results/*
 
 # Private project catch-up notes
 /docs/CATCH_UP.md
+
+# Full-sort report and plot drafts
+/docs/full-sort-results.md
+/docs/figures/full-sort-scaling.png
+/scripts/plot_full_sort.py

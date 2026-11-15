@@ -58,3 +58,15 @@ add_test(NAME rejection_sampler_correctness COMMAND test_rejection_sampler)
 
 add_library(rejection_sampler_python SHARED src/rejection_sampler_api.cu)
 target_link_libraries(rejection_sampler_python PRIVATE rejection_sampler)
+
+# Full-sort integration with the team's shared parallel sampler.
+add_library(cuda_sampler STATIC src/sampler.cu)
+target_include_directories(cuda_sampler PUBLIC include)
+target_link_libraries(cuda_sampler PUBLIC CUDA::cudart)
+
+add_library(full_sort_sampling INTERFACE)
+target_link_libraries(full_sort_sampling INTERFACE full_sort cuda_sampler)
+
+add_executable(test_full_sort_sampling tests/test_full_sort_sampling.cu)
+target_link_libraries(test_full_sort_sampling PRIVATE full_sort_sampling)
+add_test(NAME full_sort_sampling_correctness COMMAND test_full_sort_sampling)
