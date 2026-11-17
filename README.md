@@ -1,6 +1,6 @@
 # cuda-topk-sampling
 
-EE 451: compare custom CUDA full bitonic sort and hierarchical Top-k, feeding a common CUDA token sampler. Compare correctness with an explicitly tie-broken reference and performance with PyTorch Top-k. Model inference is input preparation, never part of kernel timing.
+EE 451: compare CUDA full sort, hierarchical Top-k, radix Top-k, and a PyTorch Top-k adapter, feeding a common CUDA token sampler. See the [parallel Top-k comparison](docs/topk-parallel-comparison.md) for implementation tradeoffs and available measurements. Model inference is input preparation, never part of kernel timing.
 
 ## Dataset instructions
 
