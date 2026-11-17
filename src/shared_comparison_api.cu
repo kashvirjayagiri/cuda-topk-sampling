@@ -1,16 +1,24 @@
 // Shared runner only: reuse the team's existing selectors and integrations.
 #include "full_sort_sampling.cuh"
 #include "hierarchical_topk_sampling.cuh"
+#include "topk.cuh"
 
 static_assert(sizeof(int) == sizeof(std::int32_t), "Sampler IDs require int32");
 
 extern "C" {
-// method 0 = full sort; method 1 = hierarchical. Size is per workspace buffer.
+// method 0 = full sort; method 1 = hierarchical; method 2 = radix.
+// Element count is per workspace buffer for methods 0 and 1.
 std::size_t comparison_workspace_elements(int method, int B, int V, int k) {
     if (B < 1 || k < 1 || k > V) return 0;
     if (method == 0) return topk::full_sort_workspace_elements(B, V);
     if (method == 1) return topk::hierarchical_workspace_elements(B, V, k);
     return 0;
+}
+
+int comparison_radix_workspace_bytes(int B, int V, int k,
+                                     std::size_t* bytes, void* stream_pointer) {
+    return static_cast<int>(topk::radix_topk_workspace_bytes(
+        B, V, k, bytes, reinterpret_cast<cudaStream_t>(stream_pointer)));
 }
 
 int comparison_select(int method, const float* logits, int B, int V, int k,
@@ -23,6 +31,9 @@ int comparison_select(int method, const float* logits, int B, int V, int k,
     if (method == 1)
         return static_cast<int>(topk::hierarchical_topk(logits, B, V, k, scores, ids,
                                                        {wa, ia, wb, ib, capacity}, stream));
+    if (method == 2)
+        return static_cast<int>(topk::radix_topk(logits, B, V, k, scores, ids,
+                                                {wa, capacity}, stream));
     return static_cast<int>(cudaErrorInvalidValue);
 }
 
@@ -50,6 +61,14 @@ int comparison_pipeline(int method, const float* logits, const float* randoms,
             {wa, ia, wb, ib, capacity}, scores, ids, probabilities, cdf, sampled_ids};
         return static_cast<int>(topk::hierarchical_topk_sample(
             logits, randoms, B, V, k, temperature, buffers, stream));
+    }
+    if (method == 2) {
+        const auto status = topk::radix_topk(logits, B, V, k, scores, ids,
+                                             {wa, capacity}, stream);
+        if (status != cudaSuccess) return static_cast<int>(status);
+        return static_cast<int>(jjk::sample_parallel(
+            scores, ids, randoms, B, k, temperature, probabilities, cdf,
+            sampled_ids, stream));
     }
     return static_cast<int>(cudaErrorInvalidValue);
 }

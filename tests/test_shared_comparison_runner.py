@@ -113,8 +113,10 @@ class ReferenceTests(unittest.TestCase):
 
 def result_rows():
     rows=[]
-    for start,fs,hier,py in ((0,100.,100.,120.),(1,1000.,200.,300.),(2,1000.,1000.,1100.)):
-        for method,latency in zip(METHODS,(fs,hier,py)):
+    for start,fs,hier,radix,py in ((0,100.,100.,90.,120.),
+                                   (1,1000.,200.,250.,300.),
+                                   (2,1000.,1000.,800.,1100.)):
+        for method,latency in zip(METHODS,(fs,hier,radix,py)):
             rows.append(dict(source_sha256="c"*64,dataset="temporary_test_only",dataset_kind="smoke_synthetic",
                 distribution="normal",B=1,V=19,k=10,temperature=1.,row_start=start,method=method,
                 correctness="passed",timing_backend="graph",calls_per_sample=1,warmup=3,repetitions=5,
@@ -126,8 +128,10 @@ class SummaryTests(unittest.TestCase):
     def test_pair_identical_cases_and_reject_missing_duplicate(self):
         rows=result_rows()
         paired=paired_rows(rows)
-        self.assertEqual(len(paired),9)
+        self.assertEqual(len(paired),12)
         self.assertEqual(paired[0]["selection_speedup_vs_full_sort"],1.)
+        radix=next(x for x in paired if x["method"]=="radix")
+        self.assertAlmostEqual(radix["selection_speedup_vs_full_sort"],100/90)
         with self.assertRaises(ValueError): paired_rows(rows[:-1])
         with self.assertRaises(ValueError): paired_rows(rows+[rows[0]])
 
@@ -140,16 +144,17 @@ class SummaryTests(unittest.TestCase):
     def test_summary_end_to_end_and_incomplete_run(self):
         with tempfile.TemporaryDirectory() as d:
             root=Path(d)
-            metadata=dict(status="complete",method_rows_written=9,timing_backend="graph",calls_per_sample=1,
+            metadata=dict(status="complete",method_rows_written=12,timing_backend="graph",calls_per_sample=1,
                 repetitions=5,warmup=3,gpu="TEMPORARY TEST FIXTURE",random_policy="test",random_margin=0)
             (root/"metadata.json").write_text(json.dumps(metadata))
             rows=result_rows()
             with (root/"summary.csv").open("w",newline="") as f:
                 writer=csv.DictWriter(f,fieldnames=list(rows[0])); writer.writeheader();writer.writerows(rows)
             paired,aggregates=summarize_run(root)
-            self.assertEqual(len(paired),9)
-            self.assertEqual(len(aggregates),3)
+            self.assertEqual(len(paired),12)
+            self.assertEqual(len(aggregates),4)
             self.assertTrue((root/"analysis_notes.md").is_file())
+            self.assertIn("radix", (root/"analysis_notes.md").read_text())
             metadata["status"]="incomplete"
             (root/"metadata.json").write_text(json.dumps(metadata))
             with self.assertRaisesRegex(ValueError,"incomplete"): summarize_run(root)
@@ -183,7 +188,7 @@ class TorchTests(unittest.TestCase):
         args=argparse.Namespace(timing="graph",calls_per_sample=1)
         with torch.no_grad(),torch.cuda.stream(stream):
             checked=run_preflight(ComparisonLibrary(path),torch.device("cuda",0),stream,args)
-        self.assertEqual(len(checked),48)
+        self.assertEqual(len(checked),64)
 
 
 if __name__=="__main__": unittest.main()

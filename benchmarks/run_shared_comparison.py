@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Joel's shared full-sort / hierarchical / PyTorch Top-k comparison runner."""
+"""Shared full-sort / hierarchical / radix / PyTorch Top-k comparison runner."""
 import argparse
 import csv
 from datetime import datetime, timezone
@@ -115,7 +115,7 @@ def parse_args():
     if any(x < 1 or x > 2147483647 for x in args.batch_sizes):
         p.error("Batch sizes must be positive int32 values")
     if any(x < 1 or x > 256 for x in args.k):
-        p.error("All-three comparison requires k in 1..256 (hierarchical selector limit)")
+        p.error("Four-method comparison requires k in 1..256 (hierarchical selector limit)")
     for values in (args.batch_sizes, args.k, args.temperatures):
         if len(set(values)) != len(values):
             p.error("Duplicate grid parameters are not allowed")
@@ -162,7 +162,7 @@ def discover_files(args):
 def metadata_for_run(args, library, files):
     import torch
     properties = torch.cuda.get_device_properties(args.device)
-    sources = ["src/full_sort.cu", "src/hierarchical_topk.cu", "src/sampler.cu",
+    sources = ["src/full_sort.cu", "src/hierarchical_topk.cu", "src/radix_topk.cu", "src/sampler.cu",
                "src/shared_comparison_api.cu", "include/topk.cuh", "include/sampler.h",
                "include/full_sort_sampling.cuh", "include/hierarchical_topk_sampling.cuh",
                "benchmarks/shared_pipeline.py", "benchmarks/torch_topk_adapter.py",
@@ -226,7 +226,7 @@ def run(args):
              gzip.open(output/"raw_timings.jsonl.gz", "wt", encoding="utf-8") as raw_file:
             print(f"Results directory: {output}", flush=True)
             print(f"Timing: {args.timing}; same GPU inputs, uniforms, stream and parallel sampler", flush=True)
-            print("Checking all three integrations before benchmarking...", flush=True)
+            print("Checking all four integrations before benchmarking...", flush=True)
             metadata["preflight"] = run_preflight(library, device, stream, args)
             save_metadata(meta_path, metadata)
             print(f"PASS: {len(metadata['preflight'])} preflight method/variant checks", flush=True)
@@ -331,7 +331,7 @@ def run(args):
         save_metadata(meta_path, metadata)
     from summarize_shared_comparison import summarize_run
     summarize_run(output, plots=False)
-    print(f"\nPASS: {metadata['method_rows_written']} method/case comparisons; all three pipelines checked")
+    print(f"\nPASS: {metadata['method_rows_written']} method/case comparisons; all four pipelines checked")
     print(f"Saved combined results to {output}")
     print(f"Create figures: python3 benchmarks/summarize_shared_comparison.py '{output}' --plots")
     return 0

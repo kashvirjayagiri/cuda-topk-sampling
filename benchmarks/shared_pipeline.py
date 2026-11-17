@@ -1,8 +1,8 @@
-"""The same GPU inputs/stream/sampler for all three selection methods."""
+"""The same GPU inputs/stream/sampler for all four selection methods."""
 import ctypes
 from pathlib import Path
 
-METHODS = ("full_sort", "hierarchical", "pytorch")
+METHODS = ("full_sort", "hierarchical", "radix", "pytorch")
 
 
 class ComparisonLibrary:
@@ -12,6 +12,7 @@ class ComparisonLibrary:
         p, i, z, f = ctypes.c_void_p, ctypes.c_int, ctypes.c_size_t, ctypes.c_float
         signatures = {
             "comparison_workspace_elements": ([i, i, i, i], z),
+            "comparison_radix_workspace_bytes": ([i, i, i, ctypes.POINTER(z), p], i),
             "comparison_select": ([i, p, i, i, i, p, p, p, p, p, p, z, p], i),
             "comparison_sample": ([p, p, p, i, i, f, p, p, p, p], i),
             "comparison_pipeline": ([i, p, p, i, i, i, f, p, p, p, p, p, p, z, p, p, p, p], i),
@@ -85,16 +86,22 @@ class Pipeline:
         self.work = []
         if method != "pytorch":
             native = METHODS.index(method)
-            capacity = library.lib.comparison_workspace_elements(native, B, V, k)
-            if not capacity and (method == "full_sort" or V > 256):
-                raise ValueError("Invalid selector workspace dimensions")
-            for _ in range(1 if method == "full_sort" else 2):
-                self.work.extend([torch.empty(capacity, device=device, dtype=torch.float32),
-                                  torch.empty(capacity, device=device, dtype=torch.int32)])
+            if method == "radix":
+                size = ctypes.c_size_t()
+                library.check(library.lib.comparison_radix_workspace_bytes(
+                    B, V, k, ctypes.byref(size), sp))
+                capacity = size.value  # Bytes, passed unchanged to RadixWorkspace.
+                self.work = [torch.empty(capacity, device=device, dtype=torch.uint8)]
+            else:
+                capacity = library.lib.comparison_workspace_elements(native, B, V, k)
+                if not capacity and (method == "full_sort" or V > 256):
+                    raise ValueError("Invalid selector workspace dimensions")
+                for _ in range(1 if method == "full_sort" else 2):
+                    self.work.extend([torch.empty(capacity, device=device, dtype=torch.float32),
+                                      torch.empty(capacity, device=device, dtype=torch.int32)])
             self.workspace_bytes = sum(x.numel()*x.element_size() for x in self.work)
             work_ptrs = [pointer(x) for x in self.work]
-            if method == "full_sort":
-                work_ptrs += [ctypes.c_void_p(), ctypes.c_void_p()]
+            work_ptrs += [ctypes.c_void_p()] * (4 - len(work_ptrs))
             self.select_arguments = (native, pointer(logits), B, V, k,
                                      pointer(self.scores), pointer(self.ids),
                                      *work_ptrs, capacity, sp)

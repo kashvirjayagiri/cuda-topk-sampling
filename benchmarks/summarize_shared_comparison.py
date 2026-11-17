@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Pair all three methods, collect speedups, and optionally plot a completed run."""
+"""Pair all four methods, collect speedups, and optionally plot a completed run."""
 import argparse
 from collections import defaultdict
 import csv
@@ -52,7 +52,7 @@ def paired_rows(rows):
     output = []
     for methods in cases.values():
         if set(methods) != set(METHODS):
-            raise ValueError("Each case must contain full_sort, hierarchical, and pytorch")
+            raise ValueError("Each case must contain " + ", ".join(METHODS))
         for row in methods.values():
             result = dict(row)
             for scope in ("selection", "pipeline"):
@@ -101,7 +101,8 @@ def make_plots(directory, aggregates):
     output.mkdir(exist_ok=True)
     conditions = sorted({(r["dataset_kind"], r["distribution"], r["V"], r["temperature"])
                          for r in aggregates})
-    colors = dict(full_sort="#2563eb", hierarchical="#d97706", pytorch="#059669")
+    colors = dict(full_sort="#2563eb", hierarchical="#d97706",
+                  radix="#7c3aed", pytorch="#059669")
     for kind, distribution, V, temperature in conditions:
         matching = [r for r in aggregates if (r["dataset_kind"], r["distribution"], r["V"], r["temperature"])
                     == (kind, distribution, V, temperature)]
@@ -149,7 +150,7 @@ def summarize_run(directory, plots=False):
     text = ["# Shared comparison: measurement notes", "",
             f"GPU: {metadata['gpu']}. Timing backend: {metadata['timing_backend']}.",
             f"Validated method/case rows: {len(rows)}. Repetitions per scope: {metadata['repetitions']}.",
-            "", "All three methods use the same logits, FP32 precision, temperature, supplied random values, "
+            "", "All four methods use the same logits, FP32 precision, temperature, supplied random values, "
             "CUDA stream, and compiled parallel sampler. Selection and full pipeline are timed separately; "
             "pipeline time is measured directly, not computed by adding medians.", "",
             "`summary.csv` retains each dataset and row window. `comparisons.csv` adds paired speedups "
@@ -166,12 +167,14 @@ def summarize_run(directory, plots=False):
             "CUDA graph replay measurements exclude capture/setup and reduce host-dispatch differences. "
             "Eager measurements include API dispatch gaps and may include internal PyTorch workspace "
             "allocator costs. Do not combine the two timing modes in a comparison. Explicit workspace "
-            "bytes exclude graph pools, library-internal temporaries, and allocator/process peaks.", "",
+            "bytes exclude graph pools, library-internal temporaries, and allocator/process peaks. "
+            "Radix workspace is the queried byte count, including CUB scratch, allocated before capture "
+            "or timing. Graph and eager runs must be reported separately.", "",
             "Topic groups and row windows are different workloads, not independent timing repetitions. "
             "Plot shading shows workload variation, not a confidence interval. The real dataset is a "
             "controlled DistilGPT2 sample, not evidence about all models or text inputs.", "",
             "## Observed paired wins", ""]
-    for method in ("hierarchical", "pytorch"):
+    for method in ("hierarchical", "radix", "pytorch"):
         members = [r for r in paired if r["method"] == method]
         for baseline in ("full_sort", "pytorch"):
             if method == baseline: continue
