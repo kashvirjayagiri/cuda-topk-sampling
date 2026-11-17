@@ -5,7 +5,7 @@ Validated method/case rows: 5920. Repetitions per scope: 101.
 
 All four methods use the same logits, FP32 precision, temperature, supplied random values, CUDA stream, and compiled parallel sampler. Selection and full pipeline are timed separately; pipeline time is measured directly, not computed by adding medians.
 
-`comparisons.csv` retains the measurements for each dataset and row window and adds paired speedups on identical configurations. The duplicate summary and raw timing records are retained locally. `aggregate.csv` reports the median of window medians, separately by real/synthetic dataset kind, score distribution, vocabulary size, B, k, and temperature. Paired speedups are aggregated by their own median, not by dividing aggregate medians.
+`summary.csv` retains each dataset and row window. `comparisons.csv` adds paired speedups on identical configurations. `aggregate.csv` reports the median of window medians, separately by real/synthetic dataset kind, score distribution, vocabulary size, B, k, and temperature. Paired speedups are aggregated by their own median, not by dividing aggregate medians.
 
 Speedup = baseline latency / method latency. Values above 1 mean the method is faster. The PyTorch baseline includes tie repair/order and int32 conversion. Its raw Top-k diagnostic column does not satisfy the full ordering contract and is not used for those speedups. An advantage over this adapter is not automatically an advantage over bare torch.topk.
 
