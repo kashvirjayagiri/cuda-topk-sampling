@@ -1,0 +1,1122 @@
+{
+  "status": "complete",
+  "started_utc": "2026-11-17T01:58:42.964744+00:00",
+  "methods": [
+    "full_sort",
+    "hierarchical",
+    "radix",
+    "pytorch"
+  ],
+  "common_sampler": "jjk::sample_parallel from src/sampler.cu",
+  "inputs": [
+    {
+      "path": "/scratch2/jli99757/cuda-topk-sampling/data/logits/distilgpt2/01_everyday.pt",
+      "sha256": "8a7c04e29ceba6f0ef0fff8f6f2b156984e134174275ad4cdb08986ff63cd458"
+    },
+    {
+      "path": "/scratch2/jli99757/cuda-topk-sampling/data/logits/distilgpt2/02_science.pt",
+      "sha256": "dfa3b39fdf573993e0a08f1302c399b0beac25b66c367cca83e13d939c42ae8b"
+    },
+    {
+      "path": "/scratch2/jli99757/cuda-topk-sampling/data/logits/distilgpt2/03_math.pt",
+      "sha256": "5ea3c1a40fb57ed751697ac584c23b7e401fd50eb31677f37e5305b78dbdabe7"
+    },
+    {
+      "path": "/scratch2/jli99757/cuda-topk-sampling/data/logits/distilgpt2/04_code.pt",
+      "sha256": "411fe5c1278ceaff4d474224b0df562eb0075362df571f6591d3daad8e74c146"
+    },
+    {
+      "path": "/scratch2/jli99757/cuda-topk-sampling/data/logits/distilgpt2/05_history.pt",
+      "sha256": "d6830349539c607ceeaff575d84cba522401a0c89c2bb333dc7c09e0ad06429a"
+    },
+    {
+      "path": "/scratch2/jli99757/cuda-topk-sampling/data/logits/distilgpt2/06_story.pt",
+      "sha256": "7fa80e5388778a3fea6171c89d5b72d75925e3bf1dcce6df77fca163b2626d05"
+    },
+    {
+      "path": "/scratch2/jli99757/cuda-topk-sampling/data/logits/distilgpt2/07_dialogue.pt",
+      "sha256": "2a0ceec53ddc448166e47c1037dadc62320b837fe74e6a4677a5a921a0e5f9bc"
+    },
+    {
+      "path": "/scratch2/jli99757/cuda-topk-sampling/data/logits/distilgpt2/08_facts.pt",
+      "sha256": "150795bf125921a93ae768071eec67477809d30e02136301b9c4228f74a259b4"
+    },
+    {
+      "path": "/scratch2/jli99757/cuda-topk-sampling/data/logits/distilgpt2/09_procedures.pt",
+      "sha256": "5f867f21d4acff3523b2db377eb0afdb03449924d5c38a0680ec86b3e2081ce2"
+    },
+    {
+      "path": "/scratch2/jli99757/cuda-topk-sampling/data/logits/distilgpt2/10_engineering.pt",
+      "sha256": "dcb670669f10957c9ff6061bbfc20c64ee17b26247949b594d6c61b171087e5d"
+    }
+  ],
+  "datasets": [
+    {
+      "name": "01_everyday",
+      "path": "/scratch2/jli99757/cuda-topk-sampling/data/logits/distilgpt2/01_everyday.pt",
+      "source_sha256": "8a7c04e29ceba6f0ef0fff8f6f2b156984e134174275ad4cdb08986ff63cd458",
+      "kind": "real",
+      "distribution": "model_outputs",
+      "model": "distilbert/distilgpt2",
+      "shape": [
+        32,
+        50257
+      ],
+      "random_values": [
+        0.11528527736663818,
+        0.015723824501037598,
+        0.30497950315475464,
+        0.9783782362937927,
+        0.4668477177619934,
+        0.36379241943359375,
+        0.7837657332420349,
+        0.3046378493309021,
+        0.2941480278968811,
+        0.4112778306007385,
+        0.42250514030456543,
+        0.40058988332748413,
+        0.38893353939056396,
+        0.17944061756134033,
+        0.5700711011886597,
+        0.047994375228881836,
+        0.3485884666442871,
+        0.5714942812919617,
+        0.46261388063430786,
+        0.38933277130126953,
+        0.49908941984176636,
+        0.6156718730926514,
+        0.894940972328186,
+        0.49707651138305664,
+        0.42169129848480225,
+        0.019225656986236572,
+        0.09173524379730225,
+        0.7007914781570435,
+        0.46521246433258057,
+        0.6171911358833313,
+        0.19060087203979492,
+        0.8006420731544495
+      ]
+    },
+    {
+      "name": "02_science",
+      "path": "/scratch2/jli99757/cuda-topk-sampling/data/logits/distilgpt2/02_science.pt",
+      "source_sha256": "dfa3b39fdf573993e0a08f1302c399b0beac25b66c367cca83e13d939c42ae8b",
+      "kind": "real",
+      "distribution": "model_outputs",
+      "model": "distilbert/distilgpt2",
+      "shape": [
+        32,
+        50257
+      ],
+      "random_values": [
+        0.8532475233078003,
+        0.39144450426101685,
+        0.9762598276138306,
+        0.7495155334472656,
+        0.06713193655014038,
+        0.49151813983917236,
+        0.2934578061103821,
+        0.045751869678497314,
+        0.6670995950698853,
+        0.21217912435531616,
+        0.7554454803466797,
+        0.3477128744125366,
+        0.5784321427345276,
+        0.9191340208053589,
+        0.2554636597633362,
+        0.2681584358215332,
+        0.7164286971092224,
+        0.23744773864746094,
+        0.3626677393913269,
+        0.7965908646583557,
+        0.29695314168930054,
+        0.39205020666122437,
+        0.40645885467529297,
+        0.5802251696586609,
+        0.22802913188934326,
+        0.5922321081161499,
+        0.1436748504638672,
+        0.3752818703651428,
+        0.2807404398918152,
+        0.36477190256118774,
+        0.04625505208969116,
+        0.6484904885292053
+      ]
+    },
+    {
+      "name": "03_math",
+      "path": "/scratch2/jli99757/cuda-topk-sampling/data/logits/distilgpt2/03_math.pt",
+      "source_sha256": "5ea3c1a40fb57ed751697ac584c23b7e401fd50eb31677f37e5305b78dbdabe7",
+      "kind": "real",
+      "distribution": "model_outputs",
+      "model": "distilbert/distilgpt2",
+      "shape": [
+        32,
+        50257
+      ],
+      "random_values": [
+        0.4675050973892212,
+        0.5684682726860046,
+        0.3484300374984741,
+        0.48330533504486084,
+        0.20714867115020752,
+        0.5697956085205078,
+        0.9746695756912231,
+        0.04692035913467407,
+        0.7848312854766846,
+        0.5496835112571716,
+        0.3080131411552429,
+        0.8281217217445374,
+        0.26771748065948486,
+        0.0853152871131897,
+        0.36439889669418335,
+        0.46405500173568726,
+        0.11010915040969849,
+        0.45184004306793213,
+        0.7630282044410706,
+        0.4092558026313782,
+        0.4495718479156494,
+        0.7582020163536072,
+        0.6965988278388977,
+        0.30150681734085083,
+        0.016082763671875,
+        0.2568349242210388,
+        0.967930018901825,
+        0.04947388172149658,
+        0.4301442503929138,
+        0.7071391940116882,
+        0.8085411190986633,
+        0.30236363410949707
+      ]
+    },
+    {
+      "name": "04_code",
+      "path": "/scratch2/jli99757/cuda-topk-sampling/data/logits/distilgpt2/04_code.pt",
+      "source_sha256": "411fe5c1278ceaff4d474224b0df562eb0075362df571f6591d3daad8e74c146",
+      "kind": "real",
+      "distribution": "model_outputs",
+      "model": "distilbert/distilgpt2",
+      "shape": [
+        32,
+        50257
+      ],
+      "random_values": [
+        0.6095433235168457,
+        0.07745873928070068,
+        0.04167205095291138,
+        0.9770787954330444,
+        0.26190656423568726,
+        0.24615377187728882,
+        0.7817516326904297,
+        0.7016550898551941,
+        0.005468964576721191,
+        0.5997839570045471,
+        0.824786901473999,
+        0.8076164126396179,
+        0.2917180061340332,
+        0.006450951099395752,
+        0.9601829051971436,
+        0.9963005185127258,
+        0.5711892247200012,
+        0.9549356698989868,
+        0.34237271547317505,
+        0.9880855083465576,
+        0.7954418063163757,
+        0.21683424711227417,
+        0.994804859161377,
+        0.370016872882843,
+        0.2563227415084839,
+        0.12176245450973511,
+        0.28660285472869873,
+        0.445046067237854,
+        0.49545925855636597,
+        0.2902114987373352,
+        0.7608387470245361,
+        0.40585261583328247
+      ]
+    },
+    {
+      "name": "05_history",
+      "path": "/scratch2/jli99757/cuda-topk-sampling/data/logits/distilgpt2/05_history.pt",
+      "source_sha256": "d6830349539c607ceeaff575d84cba522401a0c89c2bb333dc7c09e0ad06429a",
+      "kind": "real",
+      "distribution": "model_outputs",
+      "model": "distilbert/distilgpt2",
+      "shape": [
+        32,
+        50257
+      ],
+      "random_values": [
+        0.8074350953102112,
+        0.5706368684768677,
+        0.7904744148254395,
+        0.594752311706543,
+        0.9548492431640625,
+        0.4539324641227722,
+        0.42179155349731445,
+        0.4407668709754944,
+        0.7604098320007324,
+        0.12077218294143677,
+        0.49390268325805664,
+        0.4226415157318115,
+        0.1241646409034729,
+        0.03534400463104248,
+        0.6810681819915771,
+        0.6925218105316162,
+        0.5670927166938782,
+        0.20549792051315308,
+        0.21195381879806519,
+        0.3972991704940796,
+        0.13405996561050415,
+        0.30103129148483276,
+        0.04242593050003052,
+        0.03774648904800415,
+        0.6319150328636169,
+        0.8560265302658081,
+        0.0899810791015625,
+        0.3862760663032532,
+        0.9775543808937073,
+        0.7352959513664246,
+        0.9407591223716736,
+        0.3651389479637146
+      ]
+    },
+    {
+      "name": "06_story",
+      "path": "/scratch2/jli99757/cuda-topk-sampling/data/logits/distilgpt2/06_story.pt",
+      "source_sha256": "7fa80e5388778a3fea6171c89d5b72d75925e3bf1dcce6df77fca163b2626d05",
+      "kind": "real",
+      "distribution": "model_outputs",
+      "model": "distilbert/distilgpt2",
+      "shape": [
+        32,
+        50257
+      ],
+      "random_values": [
+        0.9161754250526428,
+        0.011529982089996338,
+        0.19955575466156006,
+        0.8751184940338135,
+        0.7814520597457886,
+        0.34379690885543823,
+        0.10154056549072266,
+        0.8836202025413513,
+        0.9195729494094849,
+        0.8538203835487366,
+        0.4562351107597351,
+        0.49819689989089966,
+        0.799527108669281,
+        0.046994566917419434,
+        0.33177071809768677,
+        0.004629313945770264,
+        0.753267765045166,
+        0.4873002767562866,
+        0.6935697197914124,
+        0.9324211478233337,
+        0.17811459302902222,
+        0.13619661331176758,
+        0.6470277905464172,
+        0.5334557294845581,
+        0.3551298975944519,
+        0.7498277425765991,
+        0.18353581428527832,
+        0.16346526145935059,
+        0.5268307328224182,
+        0.6152313351631165,
+        0.2035335898399353,
+        0.9286507368087769
+      ]
+    },
+    {
+      "name": "07_dialogue",
+      "path": "/scratch2/jli99757/cuda-topk-sampling/data/logits/distilgpt2/07_dialogue.pt",
+      "source_sha256": "2a0ceec53ddc448166e47c1037dadc62320b837fe74e6a4677a5a921a0e5f9bc",
+      "kind": "real",
+      "distribution": "model_outputs",
+      "model": "distilbert/distilgpt2",
+      "shape": [
+        32,
+        50257
+      ],
+      "random_values": [
+        0.2919618487358093,
+        0.7321321368217468,
+        0.8686596751213074,
+        0.47608011960983276,
+        0.6345008611679077,
+        0.9423533082008362,
+        0.6786206960678101,
+        0.7123988270759583,
+        0.553775429725647,
+        0.6891177296638489,
+        0.3912976384162903,
+        0.8798980712890625,
+        0.3133400082588196,
+        0.23165112733840942,
+        0.9466956257820129,
+        0.5234951972961426,
+        0.2508320212364197,
+        0.5816737413406372,
+        0.8167654871940613,
+        0.0979379415512085,
+        0.9380258917808533,
+        0.13479620218276978,
+        0.6688498258590698,
+        0.7861772179603577,
+        0.26056843996047974,
+        0.7640917301177979,
+        0.6491892337799072,
+        0.7069627642631531,
+        0.19139820337295532,
+        0.1172642707824707,
+        0.07253140211105347,
+        0.5673249959945679
+      ]
+    },
+    {
+      "name": "08_facts",
+      "path": "/scratch2/jli99757/cuda-topk-sampling/data/logits/distilgpt2/08_facts.pt",
+      "source_sha256": "150795bf125921a93ae768071eec67477809d30e02136301b9c4228f74a259b4",
+      "kind": "real",
+      "distribution": "model_outputs",
+      "model": "distilbert/distilgpt2",
+      "shape": [
+        32,
+        50257
+      ],
+      "random_values": [
+        0.44346511363983154,
+        0.2907811999320984,
+        0.15069639682769775,
+        0.7080539464950562,
+        0.3914819359779358,
+        0.1943311095237732,
+        0.9035197496414185,
+        0.987886905670166,
+        0.09622710943222046,
+        0.1121678352355957,
+        0.4331675171852112,
+        0.692963182926178,
+        0.346513569355011,
+        0.6314365863800049,
+        0.48966729640960693,
+        0.47447502613067627,
+        0.3410734534263611,
+        0.9363383054733276,
+        0.13987046480178833,
+        0.7324210405349731,
+        0.3295125961303711,
+        0.6531918048858643,
+        0.3482218384742737,
+        0.9816822409629822,
+        0.44756531715393066,
+        0.12721401453018188,
+        0.38328707218170166,
+        0.1457056999206543,
+        0.5402055978775024,
+        0.7308103442192078,
+        0.35263586044311523,
+        0.9389919638633728
+      ]
+    },
+    {
+      "name": "09_procedures",
+      "path": "/scratch2/jli99757/cuda-topk-sampling/data/logits/distilgpt2/09_procedures.pt",
+      "source_sha256": "5f867f21d4acff3523b2db377eb0afdb03449924d5c38a0680ec86b3e2081ce2",
+      "kind": "real",
+      "distribution": "model_outputs",
+      "model": "distilbert/distilgpt2",
+      "shape": [
+        32,
+        50257
+      ],
+      "random_values": [
+        0.7582231760025024,
+        0.28647464513778687,
+        0.6425821781158447,
+        0.09897005558013916,
+        0.08915072679519653,
+        0.33291321992874146,
+        0.7070101499557495,
+        0.8706393241882324,
+        0.3990393877029419,
+        0.7857868671417236,
+        0.15430337190628052,
+        0.042995452880859375,
+        0.6580672860145569,
+        0.9782769680023193,
+        0.5752821564674377,
+        0.9712429046630859,
+        0.40839749574661255,
+        0.08526802062988281,
+        0.11099618673324585,
+        0.2998353838920593,
+        0.6398099064826965,
+        0.7654252052307129,
+        0.7663121223449707,
+        0.02891141176223755,
+        0.8182631731033325,
+        0.7961676716804504,
+        0.08597815036773682,
+        0.31124359369277954,
+        0.9664914608001709,
+        0.2984803318977356,
+        0.7352995872497559,
+        0.11450296640396118
+      ]
+    },
+    {
+      "name": "10_engineering",
+      "path": "/scratch2/jli99757/cuda-topk-sampling/data/logits/distilgpt2/10_engineering.pt",
+      "source_sha256": "dcb670669f10957c9ff6061bbfc20c64ee17b26247949b594d6c61b171087e5d",
+      "kind": "real",
+      "distribution": "model_outputs",
+      "model": "distilbert/distilgpt2",
+      "shape": [
+        32,
+        50257
+      ],
+      "random_values": [
+        0.255473256111145,
+        0.2884455919265747,
+        0.07511651515960693,
+        0.470086932182312,
+        0.40363258123397827,
+        0.42212367057800293,
+        0.26474612951278687,
+        0.8095300793647766,
+        0.5145918726921082,
+        0.20190322399139404,
+        0.6450930237770081,
+        0.20552200078964233,
+        0.4998149871826172,
+        0.4055423140525818,
+        0.11621302366256714,
+        0.2867470383644104,
+        0.34845662117004395,
+        0.040370047092437744,
+        0.33750659227371216,
+        0.26967853307724,
+        0.5880294442176819,
+        0.32157576084136963,
+        0.8938241600990295,
+        0.9704737663269043,
+        0.5020467638969421,
+        0.39032918214797974,
+        0.16077470779418945,
+        0.33545833826065063,
+        0.17801427841186523,
+        0.6743030548095703,
+        0.981524646282196,
+        0.6739647388458252
+      ]
+    }
+  ],
+  "batch_sizes": [
+    1,
+    8,
+    32
+  ],
+  "k": [
+    1,
+    10,
+    50,
+    100
+  ],
+  "temperatures": [
+    1.0
+  ],
+  "windows": "all",
+  "warmup": 20,
+  "repetitions": 101,
+  "method_order": "Rotate method/scope order every repetition and input window",
+  "timing_backend": "graph",
+  "calls_per_sample": 1,
+  "statistic": "median of individual-call CUDA event times",
+  "timing_scope": "CUDA graph replay",
+  "exclusions": [
+    "disk I/O",
+    "model inference",
+    "CPU reference",
+    "validation",
+    "random generation",
+    "explicit allocations",
+    "input/output transfers",
+    "graph capture/instantiation"
+  ],
+  "timing_caveat": "Event intervals can include GPU idle gaps while the host submits a replay/call. Graph mode minimizes different Python/native dispatch costs; eager mode includes them and may include PyTorch internal workspace allocator activity.",
+  "pytorch_selection": "GPU torch.topk + kth-boundary tie repair + canonical score/ID ordering + int32 conversion; all included",
+  "raw_topk": "Separate diagnostic only; not substituted for contract-complete selection",
+  "memory_scope": "Explicit selector workspace tensor bytes only; excludes inputs/outputs, graph pools, PyTorch internal temporaries, allocator reservation, and process peak",
+  "seed": 451,
+  "random_margin": 5e-05,
+  "random_policy": "Uniform FP32 draws conditioned away from the union of CDF boundaries",
+  "reference": "Independent stable CPU sort and NumPy FP64 softmax/CDF, exact original-ID sample",
+  "atol": 1e-05,
+  "rtol": 1e-05,
+  "gpu": "Tesla V100-PCIE-32GB",
+  "compute_capability": [
+    7,
+    0
+  ],
+  "gpu_total_memory": 34072559616,
+  "torch": "2.9.1+cu128",
+  "torch_cuda_build": "12.8",
+  "native_versions": {
+    "cuda_runtime": 12080,
+    "cuda_driver": 13000,
+    "nvcc": "12.6.85"
+  },
+  "python": "3.11.9 (main, Jun  4 2024, 14:22:24) [GCC 13.3.0]",
+  "numpy": "2.3.3",
+  "hostname": "d14-12.hpc.usc.edu",
+  "slurm_job_id": "14305773",
+  "git_commit": "9a042969bf0e60aa509bfc4bbc9853aa8e469dc1",
+  "git_status": "?? shared_real_results.zip\n?? test_sampler",
+  "nvcc_version": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2024 NVIDIA Corporation\nBuilt on Tue_Oct_29_23:50:19_PDT_2024\nCuda compilation tools, release 12.6, V12.6.85\nBuild cuda_12.6.r12.6/compiler.35059454_0",
+  "source_sha256": {
+    "src/full_sort.cu": "e8cdd48949746a151c86b43f3610889d2d4fbb80527981cb963493c025f85032",
+    "src/hierarchical_topk.cu": "b9639bdf4ec869ec9b7bdfdca6b8be2ab670e6d8b1cdd3cd5b169b3b14c81924",
+    "src/radix_topk.cu": "d66301ffaf318239431640cfb9e2eb0ddd0ca9a9c68c38a7893bd76500d34494",
+    "src/sampler.cu": "e9055bd6a8f12a2b62e486dfb3166e722d9cd7618acf6c251e6a0d54fa68caef",
+    "src/shared_comparison_api.cu": "adf7fb4978a3ad3ac9992a2a95ec0cc3fccf943fc7feae55a452dd54289063fb",
+    "include/topk.cuh": "c6d97c5018124a04468f06c7cfedbb9663c71729bbad5b1f7f0dc80839be7de0",
+    "include/sampler.h": "6f4c48e7ec22f21e906d717574b3cfc02c8a579c87165c98ebbac9b068bc1ddc",
+    "include/full_sort_sampling.cuh": "f5aa3d72e06c092f976aa07d81cef76c66128f8f518a63b01a14a35c27f85fea",
+    "include/hierarchical_topk_sampling.cuh": "e92a89b767652c6b32c3d957f632f7fdadb1bab37b563ef7b2a695385d183260",
+    "benchmarks/shared_pipeline.py": "b0b6900517c45ccac1ad12775f47fdedbce9ec2eccc30d0fb5da41e449068f14",
+    "benchmarks/torch_topk_adapter.py": "cd492b569eb73fe66b05070c2156fbb4411a080b7d6dc7e238095681479d1485",
+    "benchmarks/shared_comparison_utils.py": "eb53048f0803be73e294576bc086c8c7b582c444b958760cb3a5e284400a9b0c",
+    "benchmarks/run_shared_comparison.py": "26f8998f369275b5fcba03459ca2730f2a2aa54bf0502eba6369d65324f78f84",
+    "benchmarks/summarize_shared_comparison.py": "0efb91319ba8349e63694075618af506b28339e6c95ff4da2e0524403adaea6e",
+    "scripts/build_shared_comparison.sh": "db2f412f49ab503862361140dd93efd95b123942530afaa7754230a878fffb2b",
+    "CMakeLists.txt": "483713969e625ec4661a41c7806121621b7918f2298d504182d2761bd83f8039"
+  },
+  "library_sha256": "9e6c09af6a265ab5d28986fa41b3a582f5d3c0bd0e0100e6baf391df4e9e17e3",
+  "method_rows_written": 5920,
+  "configurations_completed": 1480,
+  "preflight": [
+    {
+      "case": "tiny_padding",
+      "variant": 0,
+      "method": "full_sort",
+      "status": "passed",
+      "max_probability_error": 7.19476123123286e-08,
+      "max_cdf_error": 9.699563507936659e-08
+    },
+    {
+      "case": "tiny_padding",
+      "variant": 0,
+      "method": "hierarchical",
+      "status": "passed",
+      "max_probability_error": 7.19476123123286e-08,
+      "max_cdf_error": 9.699563507936659e-08
+    },
+    {
+      "case": "tiny_padding",
+      "variant": 0,
+      "method": "radix",
+      "status": "passed",
+      "max_probability_error": 7.19476123123286e-08,
+      "max_cdf_error": 9.699563507936659e-08
+    },
+    {
+      "case": "tiny_padding",
+      "variant": 0,
+      "method": "pytorch",
+      "status": "passed",
+      "max_probability_error": 7.19476123123286e-08,
+      "max_cdf_error": 9.699563507936659e-08
+    },
+    {
+      "case": "tiny_padding",
+      "variant": 1,
+      "method": "full_sort",
+      "status": "passed",
+      "max_probability_error": 7.19476123123286e-08,
+      "max_cdf_error": 9.699563507936659e-08
+    },
+    {
+      "case": "tiny_padding",
+      "variant": 1,
+      "method": "hierarchical",
+      "status": "passed",
+      "max_probability_error": 7.19476123123286e-08,
+      "max_cdf_error": 9.699563507936659e-08
+    },
+    {
+      "case": "tiny_padding",
+      "variant": 1,
+      "method": "radix",
+      "status": "passed",
+      "max_probability_error": 7.19476123123286e-08,
+      "max_cdf_error": 9.699563507936659e-08
+    },
+    {
+      "case": "tiny_padding",
+      "variant": 1,
+      "method": "pytorch",
+      "status": "passed",
+      "max_probability_error": 7.19476123123286e-08,
+      "max_cdf_error": 9.699563507936659e-08
+    },
+    {
+      "case": "odd_partial_tiles",
+      "variant": 0,
+      "method": "full_sort",
+      "status": "passed",
+      "max_probability_error": 1.5528881756876611e-09,
+      "max_cdf_error": 1.1272608457790767e-07
+    },
+    {
+      "case": "odd_partial_tiles",
+      "variant": 0,
+      "method": "hierarchical",
+      "status": "passed",
+      "max_probability_error": 1.5528881756876611e-09,
+      "max_cdf_error": 1.1272608457790767e-07
+    },
+    {
+      "case": "odd_partial_tiles",
+      "variant": 0,
+      "method": "radix",
+      "status": "passed",
+      "max_probability_error": 1.5528881756876611e-09,
+      "max_cdf_error": 1.1272608457790767e-07
+    },
+    {
+      "case": "odd_partial_tiles",
+      "variant": 0,
+      "method": "pytorch",
+      "status": "passed",
+      "max_probability_error": 1.5528881756876611e-09,
+      "max_cdf_error": 1.1272608457790767e-07
+    },
+    {
+      "case": "odd_partial_tiles",
+      "variant": 1,
+      "method": "full_sort",
+      "status": "passed",
+      "max_probability_error": 1.5528881756876611e-09,
+      "max_cdf_error": 1.1272608457790767e-07
+    },
+    {
+      "case": "odd_partial_tiles",
+      "variant": 1,
+      "method": "hierarchical",
+      "status": "passed",
+      "max_probability_error": 1.5528881756876611e-09,
+      "max_cdf_error": 1.1272608457790767e-07
+    },
+    {
+      "case": "odd_partial_tiles",
+      "variant": 1,
+      "method": "radix",
+      "status": "passed",
+      "max_probability_error": 1.5528881756876611e-09,
+      "max_cdf_error": 1.1272608457790767e-07
+    },
+    {
+      "case": "odd_partial_tiles",
+      "variant": 1,
+      "method": "pytorch",
+      "status": "passed",
+      "max_probability_error": 1.5528881756876611e-09,
+      "max_cdf_error": 1.1272608457790767e-07
+    },
+    {
+      "case": "cross_tile_tie_k1",
+      "variant": 0,
+      "method": "full_sort",
+      "status": "passed",
+      "max_probability_error": 0.0,
+      "max_cdf_error": 0.0
+    },
+    {
+      "case": "cross_tile_tie_k1",
+      "variant": 0,
+      "method": "hierarchical",
+      "status": "passed",
+      "max_probability_error": 0.0,
+      "max_cdf_error": 0.0
+    },
+    {
+      "case": "cross_tile_tie_k1",
+      "variant": 0,
+      "method": "radix",
+      "status": "passed",
+      "max_probability_error": 0.0,
+      "max_cdf_error": 0.0
+    },
+    {
+      "case": "cross_tile_tie_k1",
+      "variant": 0,
+      "method": "pytorch",
+      "status": "passed",
+      "max_probability_error": 0.0,
+      "max_cdf_error": 0.0
+    },
+    {
+      "case": "cross_tile_tie_k1",
+      "variant": 1,
+      "method": "full_sort",
+      "status": "passed",
+      "max_probability_error": 0.0,
+      "max_cdf_error": 0.0
+    },
+    {
+      "case": "cross_tile_tie_k1",
+      "variant": 1,
+      "method": "hierarchical",
+      "status": "passed",
+      "max_probability_error": 0.0,
+      "max_cdf_error": 0.0
+    },
+    {
+      "case": "cross_tile_tie_k1",
+      "variant": 1,
+      "method": "radix",
+      "status": "passed",
+      "max_probability_error": 0.0,
+      "max_cdf_error": 0.0
+    },
+    {
+      "case": "cross_tile_tie_k1",
+      "variant": 1,
+      "method": "pytorch",
+      "status": "passed",
+      "max_probability_error": 0.0,
+      "max_cdf_error": 0.0
+    },
+    {
+      "case": "all_equal_partial_tile",
+      "variant": 0,
+      "method": "full_sort",
+      "status": "passed",
+      "max_probability_error": 4.470348362317633e-10,
+      "max_cdf_error": 4.768371619778833e-08
+    },
+    {
+      "case": "all_equal_partial_tile",
+      "variant": 0,
+      "method": "hierarchical",
+      "status": "passed",
+      "max_probability_error": 4.470348362317633e-10,
+      "max_cdf_error": 4.768371619778833e-08
+    },
+    {
+      "case": "all_equal_partial_tile",
+      "variant": 0,
+      "method": "radix",
+      "status": "passed",
+      "max_probability_error": 4.470348362317633e-10,
+      "max_cdf_error": 4.768371619778833e-08
+    },
+    {
+      "case": "all_equal_partial_tile",
+      "variant": 0,
+      "method": "pytorch",
+      "status": "passed",
+      "max_probability_error": 4.470348362317633e-10,
+      "max_cdf_error": 4.768371619778833e-08
+    },
+    {
+      "case": "all_equal_partial_tile",
+      "variant": 1,
+      "method": "full_sort",
+      "status": "passed",
+      "max_probability_error": 4.470348362317633e-10,
+      "max_cdf_error": 4.768371619778833e-08
+    },
+    {
+      "case": "all_equal_partial_tile",
+      "variant": 1,
+      "method": "hierarchical",
+      "status": "passed",
+      "max_probability_error": 4.470348362317633e-10,
+      "max_cdf_error": 4.768371619778833e-08
+    },
+    {
+      "case": "all_equal_partial_tile",
+      "variant": 1,
+      "method": "radix",
+      "status": "passed",
+      "max_probability_error": 4.470348362317633e-10,
+      "max_cdf_error": 4.768371619778833e-08
+    },
+    {
+      "case": "all_equal_partial_tile",
+      "variant": 1,
+      "method": "pytorch",
+      "status": "passed",
+      "max_probability_error": 4.470348362317633e-10,
+      "max_cdf_error": 4.768371619778833e-08
+    },
+    {
+      "case": "exact_cdf_boundary",
+      "variant": 0,
+      "method": "full_sort",
+      "status": "passed",
+      "max_probability_error": 0.0,
+      "max_cdf_error": 0.0
+    },
+    {
+      "case": "exact_cdf_boundary",
+      "variant": 0,
+      "method": "hierarchical",
+      "status": "passed",
+      "max_probability_error": 0.0,
+      "max_cdf_error": 0.0
+    },
+    {
+      "case": "exact_cdf_boundary",
+      "variant": 0,
+      "method": "radix",
+      "status": "passed",
+      "max_probability_error": 0.0,
+      "max_cdf_error": 0.0
+    },
+    {
+      "case": "exact_cdf_boundary",
+      "variant": 0,
+      "method": "pytorch",
+      "status": "passed",
+      "max_probability_error": 0.0,
+      "max_cdf_error": 0.0
+    },
+    {
+      "case": "exact_cdf_boundary",
+      "variant": 1,
+      "method": "full_sort",
+      "status": "passed",
+      "max_probability_error": 0.0,
+      "max_cdf_error": 0.0
+    },
+    {
+      "case": "exact_cdf_boundary",
+      "variant": 1,
+      "method": "hierarchical",
+      "status": "passed",
+      "max_probability_error": 0.0,
+      "max_cdf_error": 0.0
+    },
+    {
+      "case": "exact_cdf_boundary",
+      "variant": 1,
+      "method": "radix",
+      "status": "passed",
+      "max_probability_error": 0.0,
+      "max_cdf_error": 0.0
+    },
+    {
+      "case": "exact_cdf_boundary",
+      "variant": 1,
+      "method": "pytorch",
+      "status": "passed",
+      "max_probability_error": 0.0,
+      "max_cdf_error": 0.0
+    },
+    {
+      "case": "signed_zero_kV",
+      "variant": 0,
+      "method": "full_sort",
+      "status": "passed",
+      "max_probability_error": 4.967053740534411e-09,
+      "max_cdf_error": 3.9736429924275285e-08
+    },
+    {
+      "case": "signed_zero_kV",
+      "variant": 0,
+      "method": "hierarchical",
+      "status": "passed",
+      "max_probability_error": 4.967053740534411e-09,
+      "max_cdf_error": 3.9736429924275285e-08
+    },
+    {
+      "case": "signed_zero_kV",
+      "variant": 0,
+      "method": "radix",
+      "status": "passed",
+      "max_probability_error": 4.967053740534411e-09,
+      "max_cdf_error": 3.9736429924275285e-08
+    },
+    {
+      "case": "signed_zero_kV",
+      "variant": 0,
+      "method": "pytorch",
+      "status": "passed",
+      "max_probability_error": 4.967053740534411e-09,
+      "max_cdf_error": 3.9736429924275285e-08
+    },
+    {
+      "case": "signed_zero_kV",
+      "variant": 1,
+      "method": "full_sort",
+      "status": "passed",
+      "max_probability_error": 4.967053740534411e-09,
+      "max_cdf_error": 3.9736429924275285e-08
+    },
+    {
+      "case": "signed_zero_kV",
+      "variant": 1,
+      "method": "hierarchical",
+      "status": "passed",
+      "max_probability_error": 4.967053740534411e-09,
+      "max_cdf_error": 3.9736429924275285e-08
+    },
+    {
+      "case": "signed_zero_kV",
+      "variant": 1,
+      "method": "radix",
+      "status": "passed",
+      "max_probability_error": 4.967053740534411e-09,
+      "max_cdf_error": 3.9736429924275285e-08
+    },
+    {
+      "case": "signed_zero_kV",
+      "variant": 1,
+      "method": "pytorch",
+      "status": "passed",
+      "max_probability_error": 4.967053740534411e-09,
+      "max_cdf_error": 3.9736429924275285e-08
+    },
+    {
+      "case": "finite_extremes",
+      "variant": 0,
+      "method": "full_sort",
+      "status": "passed",
+      "max_probability_error": 0.0,
+      "max_cdf_error": 0.0
+    },
+    {
+      "case": "finite_extremes",
+      "variant": 0,
+      "method": "hierarchical",
+      "status": "passed",
+      "max_probability_error": 0.0,
+      "max_cdf_error": 0.0
+    },
+    {
+      "case": "finite_extremes",
+      "variant": 0,
+      "method": "radix",
+      "status": "passed",
+      "max_probability_error": 0.0,
+      "max_cdf_error": 0.0
+    },
+    {
+      "case": "finite_extremes",
+      "variant": 0,
+      "method": "pytorch",
+      "status": "passed",
+      "max_probability_error": 0.0,
+      "max_cdf_error": 0.0
+    },
+    {
+      "case": "finite_extremes",
+      "variant": 1,
+      "method": "full_sort",
+      "status": "passed",
+      "max_probability_error": 0.0,
+      "max_cdf_error": 0.0
+    },
+    {
+      "case": "finite_extremes",
+      "variant": 1,
+      "method": "hierarchical",
+      "status": "passed",
+      "max_probability_error": 0.0,
+      "max_cdf_error": 0.0
+    },
+    {
+      "case": "finite_extremes",
+      "variant": 1,
+      "method": "radix",
+      "status": "passed",
+      "max_probability_error": 0.0,
+      "max_cdf_error": 0.0
+    },
+    {
+      "case": "finite_extremes",
+      "variant": 1,
+      "method": "pytorch",
+      "status": "passed",
+      "max_probability_error": 0.0,
+      "max_cdf_error": 0.0
+    },
+    {
+      "case": "maximum_shared_k",
+      "variant": 0,
+      "method": "full_sort",
+      "status": "passed",
+      "max_probability_error": 1.1038517634676115e-09,
+      "max_cdf_error": 1.6160421123512236e-07
+    },
+    {
+      "case": "maximum_shared_k",
+      "variant": 0,
+      "method": "hierarchical",
+      "status": "passed",
+      "max_probability_error": 1.1038517634676115e-09,
+      "max_cdf_error": 1.6160421123512236e-07
+    },
+    {
+      "case": "maximum_shared_k",
+      "variant": 0,
+      "method": "radix",
+      "status": "passed",
+      "max_probability_error": 1.1038517634676115e-09,
+      "max_cdf_error": 1.6160421123512236e-07
+    },
+    {
+      "case": "maximum_shared_k",
+      "variant": 0,
+      "method": "pytorch",
+      "status": "passed",
+      "max_probability_error": 1.1038517634676115e-09,
+      "max_cdf_error": 1.6160421123512236e-07
+    },
+    {
+      "case": "maximum_shared_k",
+      "variant": 1,
+      "method": "full_sort",
+      "status": "passed",
+      "max_probability_error": 1.1038517634676115e-09,
+      "max_cdf_error": 1.6160421123512236e-07
+    },
+    {
+      "case": "maximum_shared_k",
+      "variant": 1,
+      "method": "hierarchical",
+      "status": "passed",
+      "max_probability_error": 1.1038517634676115e-09,
+      "max_cdf_error": 1.6160421123512236e-07
+    },
+    {
+      "case": "maximum_shared_k",
+      "variant": 1,
+      "method": "radix",
+      "status": "passed",
+      "max_probability_error": 1.1038517634676115e-09,
+      "max_cdf_error": 1.6160421123512236e-07
+    },
+    {
+      "case": "maximum_shared_k",
+      "variant": 1,
+      "method": "pytorch",
+      "status": "passed",
+      "max_probability_error": 1.1038517634676115e-09,
+      "max_cdf_error": 1.6160421123512236e-07
+    }
+  ],
+  "current_case": {
+    "dataset": "10_engineering",
+    "B": 32,
+    "V": 50257,
+    "k": 100,
+    "temperature": 1.0,
+    "row_start": 0
+  },
+  "current_method": "pytorch",
+  "finished_utc": "2026-11-17T02:05:25.932909+00:00"
+}
